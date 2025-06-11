@@ -9,7 +9,7 @@ redirect_from:
 
 Welcome to my personal academic website!  
 
-I am **Hong Zhang**, a Ph.D. student in the Institute of Aerospace and Engineering at **Xi'an Jiaotong University**, China. My research interests lie at the intersection of **Computational Fluid Dynamics (CFD)**, **numerical algorithms**, and **high-performance computing (HPC)**. I specialize in developing efficient and scalable solvers for fluid flow problems, particularly leveraging **GPU acceleration** to achieve high performance.
+I am Hong Zhang, a Ph.D. student in the Institute of Aerospace and Engineering at Xi'an Jiaotong University, China. My research interests lie at the intersection of Computational Fluid Dynamics (CFD), numerical algorithms, and high-performance computing (HPC). I specialize in developing efficient and scalable solvers for fluid flow problems, particularly leveraging GPU acceleration to achieve high performance.
 
 My current work focuses on:
 - ✨ High-order numerical methods (e.g., **WENO schemes**, **finite volume/difference methods**)
