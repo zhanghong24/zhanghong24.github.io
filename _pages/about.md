@@ -17,4 +17,4 @@ Here you will find information about my:
 - 📝 [Blog](/blog/) *(optional)*
 - 📄 [Curriculum Vitae](/cv/)
 
-Feel free to contact me via email at [zhanghong6155@gmail.com](mailto:zhanghong6155@gmail.com), or visit my GitHub at [github.com/yourusername](https://github.com/yourusername).
+Feel free to contact me via email at [zhanghong6155@gmail.com](mailto:zhanghong6155@gmail.com), or visit my GitHub at [github.com/yourusername](https://github.com/zhanghong24).
