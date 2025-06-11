@@ -24,12 +24,12 @@ author:
   # Biographic information
   avatar           : "my_photo.png"
   name             : "Hong Zhang"
-  pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
-  location         : "Earth"
-  employer         : "Red Brick University"
-  uri              : # URL
-  email            : "none@example.org" 
+  pronouns         : # example: "he/him"  
+  bio              : "PhD student in Computational Fluid Dynamics"
+  location         : "China"
+  employer         : "Xi'an Jiaotong University"
+  uri              : "https://zhanghong6155.github.io"
+  email            : "zhanghong6155@gmail.com" 
 
   # Academic websites
   academia         : # URL
