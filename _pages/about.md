@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Hong Zhang | Computational Fluid Dynamics"
+title: "GPU for CFD: Fast, Simple & Robust"
 author_profile: true
 redirect_from: 
   - /about/
