@@ -7,5 +7,5 @@ excerpt: 'In this paper, a robustness-enhanced reconstruction for the high-order
 date: 2024-07-24
 venue: 'July 24'
 paperurl: 'http://zhanghong24.github.io/files/paper1.pdf'
-citation: '"*Zhang H, Ji X, Zhao Y, et al. A robustness-enhanced reconstruction based on discontinuity feedback factor for high-order finite volume scheme[J]. Journal of Scientific Computing, 2024, 101(1): 20.*"'
+citation: '"Zhang H, Ji X, Zhao Y, et al. A robustness-enhanced reconstruction based on discontinuity feedback factor for high-order finite volume scheme[J]. Journal of Scientific Computing, 2024, 101(1): 20."'
 ---
