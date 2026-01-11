@@ -1,51 +1,75 @@
 ---
-title: "ORION"
-date: 2025-12-30
+title: "HYRES"
+date: 2026-1-11
 summary: "A next-generation CFD solver designed for multi-block structured grids on CPU/GPU heterogeneous HPC systems."
 
 # 建议：封面图可以使用 ORION 架构图或大规模并行计算的渲染图
-featureImage: "img/LOGO-ORION.png" 
+featureImage: "img/logo_hyres.png" 
 
 tags: ["C++", "CUDA", "MPI", "HPC", "Heterogeneous Computing"]
 ---
 
-[cite_start]**ORION** is a high-performance, extensible CFD solver framework specifically engineered for large-scale **multi-block structured grids** on modern **heterogeneous HPC systems**.
+[cite_start]**HYRES** is a next-generation CFD solver designed for **Direct Numerical Simulation (DNS)** and **Large Eddy Simulation (LES)** of hypersonic flows.
 
-### 🚀 Core Capabilities
+Unlike legacy codes, HYRES is built from the ground up for **heterogeneous computing architectures**. By leveraging modern C++ template metaprogramming and NVIDIA CUDA, it achieves extreme arithmetic intensity on GPU clusters (e.g., V100/A100) while maintaining the rigorous accuracy required for shock-capturing and thermochemical non-equilibrium flows.
 
-[cite_start]The framework is built to achieve extreme computational efficiency while maintaining long-term extensibility across various hardware architectures.
+**Current Status:** *Under active development (Migrating from Fortran/Legacy-WCNS to C++/CUDA).*
 
-* [cite_start]**Multi-block Structured Grid**: Supports arbitrary block connectivity and efficient halo exchange via MPI.
-* [cite_start]**Heterogeneous Computing**: Architecture-neutral design with native backends for **CPU, CUDA, and HIP**, with upcoming support for DCU.
-* [cite_start]**High-Performance Parallelism**: Utilizes a CUDA-aware MPI model, overlapping computation and communication to maximize throughput.
-* [cite_start]**Scalable Physics**: Includes modular support for compressible Navier–Stokes equations, with RANS models and implicit time-marching in development.
+## 🚀 Key Features
 
+* **GPU-Native Architecture:**
+    * Optimized for massive parallelism on NVIDIA V100/A100 clusters.
+    * Utilizes **MPI + CUDA** hybrid parallelism.
+    * Targeting >80% peak FP64 performance via coalesced memory access patterns on structured grids.
+* **High-Order Numerics:**
+    * **WCNS (Weighted Compact Nonlinear Schemes)** for low-dissipation shock capturing.
+    * High-order finite difference framework on multi-block structured meshes.
+* **Thermochemical Non-Equilibrium:**
+    * Two-Temperature Model ($T_{tr}, T_{ve}$) implementation.
+    * Stiff chemistry handling via point-implicit GPU kernels.
+* **Modular Design:**
+    * **Zero-overhead abstraction** using C++17 `if constexpr` and templates.
+    * Single codebase supporting both Calorically Perfect Gas (NS) and Non-Equilibrium models without runtime penalties.
 
+## 🛠️ System Architecture
 
-### 🏗️ Software Architecture
+HYRES follows a classic decoupled pipeline optimized for HPC:
 
-[cite_start]ORION adopts a strict **Separation of Concerns** philosophy. [cite_start]The architecture is divided into independent, testable modules:
+1.  **`hyres-pre` (Preprocessing):**
+    * Domain decomposition (Load balancing for multi-GPU).
+    * Grid metric calculation & coordinate transformation.
+    * Data padding/alignment for GPU memory coalescing.
+2.  **`hyres-solver` (Core):**
+    * The main MPI+CUDA execution engine.
+    * Runge-Kutta time integration with operator splitting.
+3.  **`hyres-post` (Postprocessing):**
+    * Parallel I/O using **CGNS (HDF5)**.
+    * In-situ statistical analysis (Reynolds stress, Skin friction budgets).
 
-| Module | Responsibility |
-| :--- | :--- |
-| **core** | [cite_start]Parallel runtime, memory management, and utilities  |
-| **mesh & field** | [cite_start]Structured grid management and SoA (Structure of Arrays) data layout  |
-| **numerics** | [cite_start]High-order reconstruction, flux schemes, and operators  |
-| **comm** | [cite_start]Asynchronous halo exchange and MPI communication  |
-| **io** | [cite_start]Solver-I/O decoupled design with ParaView-compatible VTS/VTM output  |
+## 💻 Building HYRES
 
-### 💡 Parallel Execution Model
+### Prerequisites
+* **Compiler:** C++17 compliant compiler (GCC 9+, Clang 10+, or Intel ICX)
+* **GPU:** NVIDIA CUDA Toolkit 11.0+
+* **MPI:** OpenMPI or MPICH (CUDA-aware MPI recommended)
+* **Build System:** CMake 3.18+
+* **I/O:** HDF5 & CGNS libraries
 
-[cite_start]ORION organizes computation at the **block level**, which serves as the fundamental unit for execution and communication. [cite_start]A typical timestep involves:
-1.  [cite_start]**Interior Computation**: Processing the core of the block.
-2.  [cite_start]**Asynchronous Exchange**: Overlapping halo data transfer with computation.
-3.  [cite_start]**Boundary Computation**: Completing calculations at the interfaces.
-4.  [cite_start]**Update**: Final time integration step.
+### Compilation
+```bash
+# Clone the repository
+git clone [https://github.com/your-username/hyres.git](https://github.com/your-username/hyres.git)
+cd hyres
 
-### 🔗 Project Status & Access
+# Create build directory
+mkdir build && cd build
 
-[cite_start]ORION is currently under active research and development. [cite_start]Key milestones include the deployment of the multi-backend abstraction layer and implicit solvers.
+# Configure with CMake (Example for V100 Cluster)
+cmake .. \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DHYRES_ENABLE_CUDA=ON \
+    -DHYRES_GPU_ARCH=sm_70 \
+    -DHYRES_PRECISION=DOUBLE
 
-{{< button href="https://github.com/zhanghong24/ORION" target="_blank" >}}
-  Explore on GitHub
-{{< /button >}}
+# Build
+make -j 8
